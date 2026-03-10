@@ -1,20 +1,39 @@
-""" Quickstart script for InstaPy usage """
-
-# imports
 from instapy import InstaPy
 from instapy import smart_run
-from instapy import set_workspace
 
-
-# set workspace folder at desired location (default is at your home folder)
-set_workspace(path=None)
-
-# get an InstaPy session!
-session = InstaPy()
+session = InstaPy(
+    username="YOUR_INSTAGRAM_USERNAME",
+    password="YOUR_INSTAGRAM_PASSWORD",
+    headless_browser=True
+)
 
 with smart_run(session):
-    # general settings
-    session.set_dont_include(["friend1", "friend2", "friend3"])
 
-    # activity
-    session.like_by_tags(["natgeo"], amount=10)
+    # activity limits
+    session.set_quota_supervisor(
+        enabled=True,
+        peak_likes_daily=50,
+        peak_comments_daily=10,
+        peak_follows_daily=20
+    )
+
+    # like posts from hashtags
+    session.like_by_tags(
+        ["travel","nature","photography"],
+        amount=20
+    )
+
+    # follow some users
+    session.follow_by_tags(
+        ["travel","nature"],
+        amount=10
+    )
+
+    # optional comment
+    session.set_do_comment(True, percentage=20)
+
+    session.set_comments([
+        "Nice post!",
+        "Great shot!",
+        "Awesome content!"
+    ])
