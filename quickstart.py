@@ -36,4 +36,4 @@ with smart_run(session):
         "Nice post!",
         "Great shot!",
         "Awesome content!"
-    ]) 
+    ])
