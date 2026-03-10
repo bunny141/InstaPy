@@ -1,0 +1,26 @@
+name: InstaPy Automation
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # runs every 6 hours
+  workflow_dispatch:
+
+jobs:
+  run-instapy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        run: |
+          sudo apt update
+          sudo apt install python3 python3-pip -y
+
+      - name: Install InstaPy
+        run: |
+          pip3 install instapy
+
+      - name: Run InstaPy bot
+        run: python quickstart.py
